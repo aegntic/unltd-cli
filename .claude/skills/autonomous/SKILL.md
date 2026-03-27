@@ -22,27 +22,35 @@ Enable OpenCode to work autonomously with automatic task continuation, checkpoin
 ## Commands
 
 ### `/autonomous init`
+
 Initialize the autonomous workflow system for the current session.
 
 ### `/autonomous enable`
+
 Enable autonomous mode. When enabled, completing a task automatically shows the next task.
 
 ### `/autonomous add <task>`
+
 Add a task to the queue. Tasks are executed sequentially.
 
 ### `/autonomous next`
+
 Show the next task in the queue. In autonomous mode, this executes automatically after task completion.
 
 ### `/autonomous done`
+
 Mark the current task as complete. Creates a checkpoint and shows the next task (if autonomous mode is enabled).
 
 ### `/autonomous checkpoints`
+
 List all task-based checkpoints. Each checkpoint captures the workspace state.
 
 ### `/autonomous rollback <checkpoint-id>`
+
 Rollback to a specific checkpoint. Restores workspace and task queue.
 
 ### `/autonomous rollback-last-good`
+
 Rollback to the last successful checkpoint.
 
 ## How It Works
@@ -54,6 +62,7 @@ Rollback to the last successful checkpoint.
 ## Examples
 
 ### Feature Development
+
 ```
 /autonomous init
 /autonomous enable
@@ -64,6 +73,7 @@ Rollback to the last successful checkpoint.
 ```
 
 ### Bug Fix Flow
+
 ```
 /autonomous init
 /autonomous add "Reproduce the bug"

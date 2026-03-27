@@ -51,7 +51,11 @@ function generateId(): string {
   return `task_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`
 }
 
-async function createCheckpoint(taskId: string, taskDescription: string, status: "completed" | "failed"): Promise<string> {
+async function createCheckpoint(
+  taskId: string,
+  taskDescription: string,
+  status: "completed" | "failed",
+): Promise<string> {
   await ensureDir(AUTONOMOUS_DIR)
   await ensureDir(CHECKPOINT_DIR)
 
@@ -283,7 +287,12 @@ const AutonomousListCommand = cmd({
       UI.println(UI.Style.TEXT_NORMAL_BOLD + "\nTask Queue:" + UI.Style.TEXT_NORMAL)
       for (const task of tasks) {
         const statusIcon = task.status === "completed" ? "✓" : task.status === "in_progress" ? "→" : "○"
-        const statusColor = task.status === "completed" ? UI.Style.TEXT_SUCCESS : task.status === "in_progress" ? UI.Style.TEXT_WARNING : ""
+        const statusColor =
+          task.status === "completed"
+            ? UI.Style.TEXT_SUCCESS
+            : task.status === "in_progress"
+              ? UI.Style.TEXT_WARNING
+              : ""
         UI.println(`${statusColor}${statusIcon} ${task.description}${UI.Style.TEXT_NORMAL}`)
       }
     })
@@ -351,8 +360,12 @@ const AutonomousStatusCommand = cmd({
 
       UI.println(UI.Style.TEXT_NORMAL_BOLD + "\nAutonomous System Status" + UI.Style.TEXT_NORMAL)
       UI.println(`Session: ${state.sessionId || "not initialized"}`)
-      UI.println(`Autonomous: ${state.autonomousEnabled ? UI.Style.TEXT_SUCCESS + "enabled" : UI.Style.TEXT_NORMAL + "disabled"}`)
-      UI.println(`Tasks: ${tasks.filter((t) => t.status === "pending").length} pending, ${tasks.filter((t) => t.status === "completed").length} completed`)
+      UI.println(
+        `Autonomous: ${state.autonomousEnabled ? UI.Style.TEXT_SUCCESS + "enabled" : UI.Style.TEXT_NORMAL + "disabled"}`,
+      )
+      UI.println(
+        `Tasks: ${tasks.filter((t) => t.status === "pending").length} pending, ${tasks.filter((t) => t.status === "completed").length} completed`,
+      )
       UI.println(`Checkpoints: ${checkpoints.length}`)
     })
   },
